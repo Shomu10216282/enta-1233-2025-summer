@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
+
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -11,6 +14,7 @@ namespace StarterAssets
     [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
     [RequireComponent(typeof(PlayerInput))]
+    
 #endif
     public class ThirdPersonController : MonoBehaviour
     {

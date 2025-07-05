@@ -12,6 +12,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 267961
   packageName: 'Starter Assets: Character Controllers | URP'
-  packageVersion: 2.0.2
-  assetPath: Assets/Starter Assets/Runtime/Mobile/UI/TouchScreenInputUI.uxml
-  uploadId: 721456
+  packageVersion: 2.0
+  assetPath: Assets/1233_GameProgramming/ExternalPackages/Starter Assets/Runtime/Mobile/UI/TouchScreenInputUI.uxml
+  uploadId: 697084
