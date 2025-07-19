@@ -110,14 +110,6 @@
         "com.unity.shadergraph": "16.0.6"
       }
     },
-    "com.unity.render-pipelines.universal-config": {
-      "version": "17.0.3",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.render-pipelines.core": "17.0.3"
-      }
-    },
     "com.unity.rendering.light-transport": {
       "version": "1.0.1",
       "depth": 0,

@@ -23,5 +23,4 @@ public class PlayerLocatorSingleton : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

@@ -26,6 +26,8 @@ public class AgentMoveToTransform : MonoBehaviour
     public AudioClip DeathAudioClip;
     [Range(0, 1)] public float DeathAudioVolume = 0.5f;
 
+    public AudioSource DamageSound;
+
     void Start()
     {
         currentHp = maxHp;
@@ -65,16 +67,24 @@ public class AgentMoveToTransform : MonoBehaviour
                 else if (distanceToPlayer > detectionRange * 1.5f)
                 {
                     currentState = AIState.Idle;
-                    agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+
+                    if (patrolPoints.Length > currentPatrolIndex)
+                    {
+                        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+                    }
                 }
                 break;
 
             case AIState.Attack:
                 agent.ResetPath();
                 transform.LookAt(player);
+                //transform.LookAt(new Vector3(0, player.transform.position.y,0f));
 
                 if (Time.time - lastAttackTime > attackCooldown)
                 {
+                    HealthBarDisplay healtBar = PlayerLocatorSingleton.Instance.gameObject.GetComponent<HealthBarDisplay>();
+                    healtBar.OnDamageTaken(10);
+                    this.GetComponent<AIBulletManager>().Shoot();
                     Debug.Log("AI Attack!");
                     lastAttackTime = Time.time;
                 }
@@ -103,6 +113,9 @@ public class AgentMoveToTransform : MonoBehaviour
     {
         currentHp -= amount;
         Debug.Log($"{gameObject.name} took {amount} damage! Remaining HP: {currentHp}");
+
+        GetComponent<HealthBarDisplay>().UpdateHp((float)currentHp / maxHp);
+        DamageSound.Play();
 
         if (currentHp <= 0)
         {

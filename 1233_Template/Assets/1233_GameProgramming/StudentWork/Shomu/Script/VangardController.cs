@@ -211,12 +211,21 @@ namespace Vangard
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                //Don't multiply mouse input by Time.deltaTime;
+                // Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
                 float sensitivityMultiplier = Input.Aim ? AimSensitivity : NormalSensitivity;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                if (Input.Aim)
+                {
+                    _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
+
+                    _cinemachineTargetPitch = 2.5f;
+                }
+                else
+                {
+                    _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
+                    _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                }
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -227,6 +236,8 @@ namespace Vangard
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
+
+            
 
         private void CheckAim()
         {

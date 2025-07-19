@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthBarDisplay : MonoBehaviour
 {
     [SerializeField] private Image HealthBarFill;
     [SerializeField] private int maxHp = 100;
+    public AudioSource DamageSound;
 
     private int currentHp;
 
@@ -21,6 +23,7 @@ public class HealthBarDisplay : MonoBehaviour
         UpdateHp(1f); 
     }
 
+    [Obsolete]
     public void OnDamageTaken(int damage)
     {
         currentHp -= damage;
@@ -28,13 +31,22 @@ public class HealthBarDisplay : MonoBehaviour
         if (currentHp <= 0)
         {
             Die();
+            Destroy(gameObject);
         }
+
+        DamageSound.Play();
     }
 
+    [Obsolete]
     private void Die()
     {
         Debug.Log("You are dead");
-        Destroy(gameObject);
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.GameOver();
+        }
     }
 
     /// <summary>

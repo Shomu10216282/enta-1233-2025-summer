@@ -21,6 +21,7 @@ public class AIBulletManager : BaseBulletManager
         player = PlayerLocatorSingleton.Instance.transform;
     }
 
+
     private void Update()
     {
         if (player == null) return;
@@ -34,11 +35,12 @@ public class AIBulletManager : BaseBulletManager
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         if (BulletSpawnPoint != null)
         {
             SpawnPhysicsBullet(BulletSpawnPoint);
+            ShootingSource.Play();
         }
     }
 }
