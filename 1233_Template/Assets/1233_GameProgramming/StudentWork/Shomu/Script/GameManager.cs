@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameWonUI;
     private bool isGameOver = false;
     public bool isGameWon = false;
+    public AudioSource BGMSound;
     public AudioSource WinSound;
     public AudioSource LoseSound;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         isGameWon = true;
         gameWonUI.SetActive(true);
         Time.timeScale = 0f;
+        BGMSound.Stop();
         WinSound.Play();
     }
 
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
-
+        BGMSound.Stop();
         LoseSound.Play();
     }
 
@@ -52,6 +54,15 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void Setting()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Setting");
+
+    }
+
 
     public void ReturnToTitle()
     {
