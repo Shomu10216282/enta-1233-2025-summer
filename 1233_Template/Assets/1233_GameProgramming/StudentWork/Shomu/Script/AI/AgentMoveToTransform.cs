@@ -78,7 +78,7 @@ public class AgentMoveToTransform : MonoBehaviour
             case AIState.Attack:
                 agent.ResetPath();
                 transform.LookAt(player);
-                //transform.LookAt(new Vector3(0, player.transform.position.y,0f));
+                transform.LookAt(new Vector3(0, player.transform.position.y,0f));
 
                 if (Time.time - lastAttackTime > attackCooldown)
                 {

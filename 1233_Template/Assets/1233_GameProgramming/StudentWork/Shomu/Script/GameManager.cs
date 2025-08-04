@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
     public GameObject gameWonUI;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
     public bool isGameWon = false;
     public AudioSource BGMSound;
     public AudioSource WinSound;

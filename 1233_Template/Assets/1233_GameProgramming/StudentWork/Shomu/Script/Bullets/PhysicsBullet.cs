@@ -12,6 +12,9 @@ namespace Vangard
         [SerializeField] private int ProjectileDamage;
         [SerializeField] private Rigidbody Rb;
         private BaseBulletManager bulletManager;
+
+        [SerializeField] private float lifeTime = 5f;
+
         public void Initialize(BaseBulletManager manager)
         {
             bulletManager = manager;
@@ -21,6 +24,14 @@ namespace Vangard
             Rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             Rb.interpolation = RigidbodyInterpolation.Interpolate;
             Rb.AddForce(transform.forward * ProjectileSpeed, ForceMode.Impulse);
+            Rb = GetComponent<Rigidbody>();
+
+            Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            Rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+            Rb.velocity = transform.forward * ProjectileSpeed;
+
+            Destroy(gameObject, lifeTime);
         }
 
         private void OnTriggerEnter(Collider collision)

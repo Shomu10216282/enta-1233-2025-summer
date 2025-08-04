@@ -8,8 +8,22 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject settingUI;
 
     private bool isPaused = false;
+
+    private GameManager gameManager;
+
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
+
     void Update()
     {
+        if (gameManager != null && (gameManager.isGameWon || gameManager.isGameOver))
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (settingUI.activeSelf)
